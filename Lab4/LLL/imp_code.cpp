@@ -13,6 +13,21 @@ int list :: copy(node* head, node*& dest)
 int list :: copy(node* head, node* source, node*& dest)
 {
 	if(!head) return 0;
+	if((head->next->next == NULL) && (tail->data == source->data))
+	{
+		cout << "tail" << tail->data << endl;
+		cout << "head data" << head->next->data<<endl;
+		dest->data = head->data;
+		dest->next = head->next->next;
+		dest = head;
+	//	return 1;
+	}
+	dest = new node;
+	dest->data = head->data;
+	dest=head->next;
+	copy(head->next,source, dest);
+	return 1;
+}
 	/*
 	if(head->next->next==NULL)
 	{
@@ -20,23 +35,8 @@ int list :: copy(node* head, node* source, node*& dest)
 		cout << "head next data " << head->next->data << endl;
 	}
 	*/
-	dest = new node;
-	dest->data = head->data;
-	dest=head->next;
-	copy(head->next,source, dest);
-	return 1;
-}
 
 	/*
-	if((head->next->next == NULL))// && (tail->data == source->data))
-	{
-		cout << "tail" << tail->data << endl;
-		cout << "head data" << head->next->data<<endl;
-		//dest->data = head->data;
-		//dest->next = head->next->next;
-		//dest = head;
-	//	return 1;
-	}
 	*/
 
 int list::displayall(node* dest)
