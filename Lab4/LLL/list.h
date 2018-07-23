@@ -26,14 +26,19 @@ class list
 	int copy();
 	int count(int match);
 	int display_iff();
+	int remove();
 
    private:		//notice there is both a head and a tail!
 	int copy(node* head, node*& dest);
 	int copy(node* head, node* source, node*& dest);	
 
 	int count(node* head, int match);
+
 	int display_exceptL(node*head);//display except first and last
 	int display_exceptF(node*head);//display except first and last
+
+	int remove_all(node*& head);
+	int remove_except_lasttwo(node*& head);
 
       node * head;
       node * tail;

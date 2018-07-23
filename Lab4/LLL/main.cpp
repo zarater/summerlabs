@@ -12,11 +12,11 @@ int main()
 	/*
 	object.copy();
 	object.count(match);
+	object.display_iff();
 	 */
 
     //PLEASE PUT YOUR CODE HERE to call the function assigned
-	object.display_iff();
-    
+    object.remove();
 
     object.display();  //displays the LLL again!
    

@@ -1,5 +1,5 @@
 #include "list.h"
-
+//code
 int list :: copy(node* head, node*& dest)
 {
 	if(!head) return 0;
@@ -36,33 +36,63 @@ int list :: count(node* head, int match)
 int list :: display_exceptL(node* head)
 {
 	if(!head) return 0;
-	if(!head->next) return head->data; 
-	cout << head->data << endl;
+	if(!head->next) return head->data;
 	int num = display_exceptL(head->next);
-	return num; //head->data;
+	return num;
+
 }
 int list :: display_exceptF(node* head)
 {
 	if(!head) return 0;
-	cout << "head->data" << head->data << endl;
-	int num = display_exceptF(head->next);
-	cout << "head->dataafter" << head->data <<endl;//<< endl;
-	cout << "num " << num << endl;
+	if(head->next!=NULL)
+	{
+		if(head->next->next != NULL)
+		{
+		cout << head->next->data; 
+		if(head->next->next->next != NULL)
+	   cout << "->";
+	   else 
+		   cout << " " << endl;
+		}
+
+	}
+	display_exceptF(head->next);
+	int num = head->data;
 	return num; //head->data;
 }
+int list :: remove_all(node*& head)
+{
+	if(!head) return 0;
+	delete head;
+	remove_all(head->next);
+	head= NULL;
+	return 1;
 
+	/*#2
+	if(!head) return 0;
+	remove_all(head->next);
+	node* temp = new node;
+	temp = head;
+	delete head;
+	head = temp;
+	head = NULL;
+	return 1;
+	*/
+}
+int list :: remove_except_lasttwo(node*& head)
+{
+	if(!head) return 0;
+	if(!head->next->next && !head->next) return 0;
+	delete head;
+	remove_except_lasttwo(head->next);
+	head = NULL;
+	return 1;
+}
 
 
 	/*
-	if(num == 0 && !head->next)
-	{
-		num= num+head->data;
-		return display_exceptFL(head->next, num);
-	}	
-
-	cout << head->data << endl;
-	return display_exceptFL(head->next, num);
-}
+	 *
+	   if(head->next->next)
 
 int list :: count_all(node* head)
 {

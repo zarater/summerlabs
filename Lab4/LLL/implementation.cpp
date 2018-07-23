@@ -34,11 +34,34 @@ int list :: count(int match)
 
 int list :: display_iff()
 {
-	//int total = count_all();
-	int sum = display_exceptL(head);
+	int sum = display_exceptL(head)+display_exceptF(head);
 	cout << "sum" << sum << endl;
 	return sum;
 }
+int list :: remove()
+{
+	int user;
+
+	cout << "which" << endl;
+	cout << "delete all 1, delete except last two 2, delete middle 3, delete front4 delete last 3" << endl;
+	cin >> user;
+	
+	if(user==1) remove_all(head);
+	if(user==2) remove_except_lasttwo(head);
+	return 1;
+}
+	/*
+	 * a verson of display.. could not display first but last and save last not save first
+	if(!head) return 0;
+	cout << head->data << endl;
+	if(!head->next) return head->data; 
+	if(head->next && head->next->data+head->data !=head->data)
+	int num = display_exceptL(head->next);
+	cout << "head->dataafter" << head->data <<endl;//<< endl;
+	int num2 = head->data;
+	cout << "num " << num<< "num2 " << num2 << endl;
+	return num; //head->data;
+	*/
 	/*
 	 * stuff that helps solve... put inside conditionals or wherever
 		cout << "source data " << source->data << endl;
