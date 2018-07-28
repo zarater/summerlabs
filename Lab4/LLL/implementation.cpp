@@ -40,14 +40,16 @@ int list :: display_iff()
 }
 int list :: remove()
 {
-	int user;
+	int user = 0;
+	int n =0 ;
 
 	cout << "which" << endl;
 	cout << "delete all 1, delete except last two 2, delete middle 3, delete front4 delete last 3" << endl;
 	cin >> user;
 	
-	if(user==1) remove_all(head);
-	if(user==2) remove_except_lasttwo(head);
+	if(user==1) n = remove_all(head);
+	if(user==2) n = remove_except_lasttwo(head);
+	cout << "n" << n << endl;
 	return 1;
 }
 	/*

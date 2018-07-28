@@ -82,30 +82,22 @@ int list :: remove_all(node*& head)
 int list :: remove_except_lasttwo(node*& head)
 {
 	if(!head) return 0;
-	if(!head) return 0;
-	remove_all(head->next);
-	node* temp = new node;
-	temp = head;
-	delete head;
-	head = temp;
-	head = NULL;
-	return 1;
-	if(!head->next->next)
+	if(head->next!=NULL)
 	{
-		cout << "head data" <<  head->data << endl;
-		cout << "head next data" << head->next->data << endl;
-		return 0;
-
-	}
-		if(head->next == NULL)
+		if(head->next->next ==NULL)
 		{
-			cout << "head data" <<  head->data << endl;
+			node* temp = head;
+			cout << "temp" << temp->data << endl;
+			cout << "temp" << temp->next->data << endl;
 			return 0;
 		}
-
-	return 1;
+	}
+	cout << "head stuff" << head->data << endl;
+	delete head;
+	int n =remove_except_lasttwo(head->next)+1;
+	head= NULL;
+	return n;
 }
-
 
 	/*
 	 *
