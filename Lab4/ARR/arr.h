@@ -18,11 +18,13 @@ class table
        ~table();	//supplied
        void build();  	//supplied
        void display();  //supplied
+	   int test();
 
     /* *****************YOUR TURN! ******************************** */
     //Write your function prototype here:
-
+	int display_all();
     private:
+	int display_all(node** head);
        node ** head; 	//dynamically allocated array
        int size; 	//the array size
 };
