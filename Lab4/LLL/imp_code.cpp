@@ -1,6 +1,6 @@
 #include "list.h"
 //code
-int list :: copy(node* head, node*& dest)
+int list :: copy(node* head, node*& dest)//copies all
 {
 	if(!head) return 0;
 	copy(head->next, dest);
@@ -10,7 +10,7 @@ int list :: copy(node* head, node*& dest)
 	return 1;
 }
 
-int list :: copy(node* head, node* source, node*& dest)
+int list :: copy(node* head, node* source, node*& dest)//copies  except last item
 {
 	if(!head) return 0;
 	if(head->next == NULL && tail->data == source->data)

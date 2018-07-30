@@ -7,6 +7,7 @@ int list :: copy()
 	node* dest;
 	node* source = new node;
 	source->data = head->data;
+	source->next = NULL;
 
 	cout << "which" << endl;
 	cout << "copy all 1, copy not last if last is first 2" << endl;
