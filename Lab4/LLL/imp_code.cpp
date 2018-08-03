@@ -79,29 +79,20 @@ int list :: remove_all(node*& head)
 	return 1;
 	*/
 }
-int list :: remove_except_lasttwo(node*& head)
+int list :: remove_except_lasttwo(node*& head)//TODO
 {
 	if(!head) return 0;
-	if(head->next!=NULL)
-	{
-		if(head->next->next ==NULL)
-		{
-			node* temp = head;
-			cout << "temp" << temp->data << endl;
-			cout << "temp" << temp->next->data << endl;
-			return 0;
-		}
-	}
-	cout << "head stuff" << head->data << endl;
+	if(!head->next) return 0;
+	if(!head->next->next) return 0;
+	int x = head->data;
+	node* temp = head->next;
 	delete head;
-	int n =remove_except_lasttwo(head->next)+1;
-	head= NULL;
-	return n;
+		head = temp;//traversing
+	if(head)
+		return remove_except_lasttwo(head) + x;
+	return x;
 }
-
 	/*
-	 *
-	   if(head->next->next)
 
 int list :: count_all(node* head)
 {

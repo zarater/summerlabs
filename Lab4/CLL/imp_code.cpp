@@ -70,7 +70,8 @@ int list :: remove_last(node*& rear)
 	return n;
 }
 
-int list :: remove_iff_samerear(node*& rear, node* prev, int source)//remove if any data are the rear pointer
+int list :: remove_iff_samerear(node*& rear, node* prev, int source)
+	//remove if any data are the rear pointer data
 {
 	if(!rear) return 0;
 	if(rear == this->rear) return 0;
@@ -86,55 +87,87 @@ int list :: remove_iff_samerear(node*& rear, node* prev, int source)//remove if 
 	/*
 	 *-----> COPY FUNCTION
 	*/
+int list :: copy_last(node* rear, node* prev, node*& dest)//copies all except last
+{
+	if(!rear) return 0;
+	if(rear == this->rear) return 0;
+	if(!dest)
+	{
+		dest = new node;
+		dest->data = rear->data;
+		dest->next = dest;
+	}
+	else
+	{
+	node*temp = new node; 
+	temp->data = rear->data;
+	temp->next = dest->next;
+	dest->next = temp;
+	dest = temp;
+	}
+	int n =copy_last(rear->next,rear,  dest)+1;
+	return n;
 
+}
 
-int list :: copy_all(node* rear, node* prev, node*& dest)
+int list :: copy_all(node* rear, node*& dest)
 {
 	//I'm allowed to do this because rear is actuall rear-> next and prev is rear
 	if(!rear) return 0;
-	dest = new node; 
-	dest = rear;
+	if(!dest)
+	{
+		dest = new node;
+		dest->data = rear->data;
+		dest->next = dest;
+	}
+	else
+	{
+	node*temp = new node; 
+	temp->data = rear->data;
+	temp->next = dest->next;
+	dest->next = temp;
+	dest = temp;
+	}
+	/*
+	*/
+
+
 	if(rear == this->rear) return 0;
-	int n =copy_all(rear->next, rear, rear->next)+1;
+	int n =copy_all(rear->next,  dest)+1;
 	return n;
 
 }
 	/*
 	*/
-int list :: copy_last(node* rear, node* prev, node*& dest)//copies all except last
+
+	
+int list :: copy_cll_notmult2(node* rear, node*& dest)
 {
 	if(!rear) return 0;
-	dest = new node;
-	dest->data = rear->data;
-	dest = rear;
-	if(rear->next == this->rear)
+	if(rear->data%2!=0)
 	{
-		//dest next is null alread per deconstructor given
-		return 0;
-	}
-	int n =	copy_last(rear->next, rear, dest->next)+1;
-	return n;
-}
-
-
-int list :: copy_cll_notmult2(node* rear, node* prev, node*& dest)
-{
-	if(!rear) return 0;
-	if(rear->data%2==0)
+	if(!dest)
 	{
-		if(rear->next != this->rear)
-		{
-	//cout << "here" << endl;
-		   	rear = rear->next;
-		}
+		dest = new node;
+		dest->data = rear->data;
+		dest->next = dest;
 	}
-	dest = new node; 
-	dest = rear;
+	else
+	{
+	node*temp = new node; 
+	temp->data = rear->data;
+	temp->next = dest->next;
+	dest->next = temp;
+	dest = temp;
+	}
+	}
 	if(rear == this->rear) return 0;
-	int n =copy_cll_notmult2(rear->next, rear, dest->next)+1;
+	int n =copy_cll_notmult2(rear->next, dest)+1;
 	return n;
 }
 
+	/*
+	*/
 	/*
 	 *-----> count FUNCTION
 	*/
@@ -164,47 +197,61 @@ int list :: add_all(node*& rear,int source) //add to end but only if data is
 	int n = add_all(rear->next, source)+1;
 	return n;
 }
-int list :: add_only_dif(node*& rear, int checked, int source) //add to end but only if data is diff
+int list :: add_only_dif(node*& rear, int checked, int source) //add to end but only if data is diff from int source
 {
 	if(!rear) return 0;
-		//cout << "source" << source << "rear data" << rear->data << endl;
-		if(rear->next == this->rear)
-		{
-	if(checked == 0)//nothing in list that matches
+	if(rear->next == this->rear)
 	{
-			//cout << "here" << endl;
-		node* temp= new node;
-		temp->data = source;
-		temp->next = rear->next;
-		rear->next = temp;
-		return 0;
+		if(checked == 0)//nothing in list that matches
+		{
+			node* temp= new node;
+			temp->data = source;
+			temp->next = rear->next;
+			rear->next = temp;
+			return 0;
 		}
 	}
 	if(rear->next == this->rear) return 0;
-		int n = add_only_dif(rear->next,checked, source)+1;
+	int n = add_only_dif(rear->next,checked, source)+1;
 	return n;
 }
 
-//	TODO	add using this method..
 /*********************************************************/
-int list :: add_before_even(node*&rear, node*prev)//add before node with even data
+
+int list :: add_before_even(node*&rear, node*&prev)
+	//add before node with even data
 {
 	if(!rear) return 0;
-	/*
-	*
-	*/
-		cout << prev->data <<"  .  " << rear->data << endl;
-	if(rear->data%2 == 0)
-	{
-		cout << prev->data <<"    " << rear->data << endl;
-		cout << prev->next->next->data << endl;
+	if(rear->data%2 == 0)	{
 		node* temp = new node;
-		temp->data = 10000;
+		temp->data = 10001;
+		//temp data cant be even or it wont stop
+		
+	/********tail recursion^***********/
 		temp->next = prev->next;
 		prev->next = temp;
+		prev = temp;
+	/********tail recursion^***********/
 	}
 	if(rear == this->rear) return 0;
-		return add_before_even(rear->next, rear)+1;
+	return add_before_even(rear->next, rear)+1;
+}
+int list :: add_before_even2(node*&rear, node*&prev)//add before node with even data
+{
+	if(!rear) return 0;
+	if(rear == this->rear) return 0;
+	int n = add_before_even2(rear->next, rear)+1;
+	if(rear->data%2 == 0)//temp data cant be even or it wont stop
+	{
+		node* temp = new node;
+		temp->data = 10001;
+	/***^^head recursion^************/
+		temp->next = rear;
+		prev->next = temp;
+		prev = temp;
+	/**difference going back. think backwords*****/
+/**********^^^^^^^^^^^^^^^^^^^^^********************/
+	}
+	return n;
 
 }
-/*********************************************************/

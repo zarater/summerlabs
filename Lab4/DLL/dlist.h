@@ -21,12 +21,19 @@ class list
         ~list();        //supplied
         void build();   //supplied
         void display(); //supplied
+/* *****************	YOUR TURN! ***************************** */
         
+	int copy_all(list& obj);
+	int remove_all();
+	int add_all();
 
-     /* *****************YOUR TURN! ******************************** */
-     /* place your prototype here */
+
      
      private:
+	int add_duplicat(node*& head, int source);
+	int copy_all(node*& head, node*& dest);
+	int remove_if_larger_thenfirst(node*&head, node*& prev, int source);
+
          node * head;   //notice there is both a head
          node * tail;   //and a tail, common for DLL
 };

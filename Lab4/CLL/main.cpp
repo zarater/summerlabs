@@ -9,15 +9,24 @@ int main()
 
 	/* 
 	object.display_all();
-	object.remove_all();
 	object.count_all();
 	object.add_all();
 
 	 */
 
-    //PLEASE PUT YOUR CODE HERE to call the function assigned
-	object.copy_all();
+/************ for only copy *****************/
+	/* 
+	list objcopy;
+	object.copy_all(objcopy);
+	cout << "new rear -----------> :"; 
+	objcopy.display();
+	cout << "end of new rear----------------> ";
+	*/
+/************ for only copy *****************/
 
+
+    //PLEASE PUT YOUR CODE HERE to call the function assigned
+	object.remove_all();
     object.display(); //resulting list after your function call!
     
     return 0;

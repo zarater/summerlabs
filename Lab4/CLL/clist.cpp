@@ -27,19 +27,18 @@ int list :: remove_all()
 	return n;
 }
 
-int list :: copy_all()//TODO DOESNT DISPLAY LAST
+int list :: copy_all(list& obj)//Passes display in main
 {
-	node* dest = NULL;
-	//int source = rear->data;
+	node* dest = obj.rear;//----> this gets intialized bu tcan look like copy_cll_n..(..)
 	int n = 0;
 	int user = 0;
 	cout << "which?" << endl;
 	cin>> user;
-	 if(user==1) n = copy_all(rear->next, rear, dest);//copies all//TODO FIX ARGS
-	 if(user==2) n = copy_last(rear->next, rear, dest);//copies except last
-	 if(user==3) n = copy_cll_notmult2(rear, rear, dest);
+	 if(user==1) n = copy_all(rear->next, dest);// uses dest = obj.rear. UNCOMMENT below
+	 if(user==2) n = copy_last(rear->next, rear, obj.rear);//copies except last
+	 if(user==3) n = copy_cll_notmult2(rear->next, obj.rear);
 	 cout << "n" << n << endl;
-	 display_all(dest);
+	 //obj.rear = dest;//---> UNCOMMENT to display copy_all(...dest)
 	return n;
 }
 
@@ -57,11 +56,11 @@ int list :: check(node* rear, int source)
 {
 	if(!rear) return 0;
 	if(rear->next == this->rear) return 0;
- int checkn = check(rear->next, source);
-if(source == rear->data)
-{ 
-	checkn += 1;
-}
+	int checkn = check(rear->next, source);
+	if(source == rear->data)
+	{ 
+		checkn += 1;
+	}
 	return checkn;
 }
 
@@ -78,7 +77,8 @@ int list :: add_all()
 	cin >> user;
 	if(user== 1) n = add_all(rear, source);
 	if(user==2)	n = add_only_dif(rear,checked, source);
-	if(user==3)	n = add_before_even(rear->next,rear);
+	if(user==3)	n = add_before_even(rear->next,rear);//tail recursion
+	if(user==4)	n = add_before_even2(rear->next, rear);//head recursion
 	cout << "n" << n << endl;
 	return n;
 }
